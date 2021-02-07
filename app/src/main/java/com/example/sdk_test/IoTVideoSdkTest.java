@@ -24,6 +24,7 @@ public class IoTVideoSdkTest extends AppCompatActivity implements View.OnClickLi
     private Button btn_init;
     private Button btn_register;
     private Button btn_unregister;
+    private Button btn_getTerminalId;
     private Button btn_getLocalIPAddress;
     private TextView tv_print;
 
@@ -43,11 +44,13 @@ public class IoTVideoSdkTest extends AppCompatActivity implements View.OnClickLi
         btn_init = (Button)findViewById(R.id.btn_init);
         btn_register = (Button)findViewById(R.id.btn_register);
         btn_unregister = (Button)findViewById(R.id.btn_unregister);
+        btn_getTerminalId = (Button)findViewById(R.id.btn_getTerminalId);
         btn_getLocalIPAddress = (Button)findViewById(R.id.btn_getLocalIPAddress);
 
         btn_init.setOnClickListener(this);
         btn_register.setOnClickListener(this);
         btn_unregister.setOnClickListener(this);
+        btn_getTerminalId.setOnClickListener(this);
         btn_getLocalIPAddress.setOnClickListener(this);
 
         AccessId = Long.parseLong(getApplicationContext().getString(R.string.AccessId));
@@ -102,6 +105,10 @@ public class IoTVideoSdkTest extends AppCompatActivity implements View.OnClickLi
                 else{
                     setTextView(tv_print, "反注册SDK失败" + ",P2P版本为" + p2pVersion);
                 }
+                break;
+                
+            case R.id.btn_getTerminalId:
+                setTextView(tv_print, "终端ID为：" + String.valueOf(IoTVideoSdk.getTerminalId()));
                 break;
         }
     }
