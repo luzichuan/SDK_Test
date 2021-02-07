@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/pro_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="程序包：" />
+
+        <Spinner
+            android:id="@+id/pro_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/cls_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="类名：" />
+
+        <Spinner
+            android:id="@+id/cls_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_activityStart"
+            android:layout_width="208dp"
+            android:layout_height="wrap_content"
+            android:text="启动指定程序包测试类" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
