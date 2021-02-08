@@ -4,19 +4,19 @@
     android:layout_height="match_parent"
     android:layout_gravity="fill"
     android:columnCount="4"
-    android:rowCount="8"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:rowCount="8">
 
     <Button
         android:id="@+id/btn_init"
-        android:text="init"
         android:layout_margin='2dp'
+        android:text="init"
         android:textAllCaps="false" />
 
     <Button
         android:id="@+id/btn_register"
-        android:text="register"
         android:layout_margin='2dp'
+        android:text="register"
         android:textAllCaps="false" />
 
     <Button
@@ -28,8 +28,8 @@
     <Button
         android:id="@+id/btn_unregister"
         android:layout_columnSpan="1"
-        android:layout_margin='2dp'
         android:layout_gravity="fill"
+        android:layout_margin='2dp'
         android:text="unregister"
         android:textAllCaps="false" />
 
@@ -37,15 +37,15 @@
         android:id="@+id/btn_getTerminalId"
         android:layout_columnSpan="2"
         android:layout_gravity="fill"
-        android:text="getTerminalId"
         android:layout_margin='2dp'
+        android:text="getTerminalId"
         android:textAllCaps="false" />
 
     <Button
         android:id="@+id/btn_getLocalIPAddress"
         android:layout_columnSpan="2"
-        android:layout_margin='2dp'
         android:layout_gravity="fill"
+        android:layout_margin='2dp'
         android:text="@string/getlocalipaddress"
         android:textAllCaps="false" />
 
@@ -55,15 +55,14 @@
         android:layout_gravity="fill"
         android:layout_margin='2dp'
         android:text="Console"
-        android:textAlignment="4"
-        />
+        android:textAlignment="4" />
 
     <TextView
         android:id="@+id/tv_print"
         android:layout_row="4"
+        android:layout_rowWeight="1"
         android:layout_columnSpan="4"
         android:layout_gravity="fill"
-        android:layout_rowWeight="1"
         android:background="@color/black"
         android:fadeScrollbars="false"
         android:scrollbars="vertical"

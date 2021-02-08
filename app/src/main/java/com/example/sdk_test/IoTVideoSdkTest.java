@@ -64,6 +64,7 @@ public class IoTVideoSdkTest extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_init:
                 IoTVideoSdk.init(getApplication(),null);
                 setTextView(tv_print, "初始化SDK");
+                break;
 
             //注册sdk
             case R.id.btn_register:
@@ -106,7 +107,8 @@ public class IoTVideoSdkTest extends AppCompatActivity implements View.OnClickLi
                     setTextView(tv_print, "反注册SDK失败" + ",P2P版本为" + p2pVersion);
                 }
                 break;
-                
+
+            //获取终端ID
             case R.id.btn_getTerminalId:
                 setTextView(tv_print, "终端ID为：" + String.valueOf(IoTVideoSdk.getTerminalId()));
                 break;
