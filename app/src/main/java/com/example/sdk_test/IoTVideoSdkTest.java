@@ -54,7 +54,7 @@ public class IoTVideoSdkTest extends AppCompatActivity implements View.OnClickLi
         AccessToken = getApplicationContext().getString(R.string.AccessToken);
 
         IoTVideoSdk.init(getApplication(),null);
-        setTextView(tv_print, "已自动初始化SDK");
+        setTextView(tv_print, "已自动初始化SDK，测试");
 
     }
 
