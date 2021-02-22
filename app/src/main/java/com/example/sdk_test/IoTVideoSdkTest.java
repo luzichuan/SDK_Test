@@ -21,7 +21,6 @@ import java.util.Date;
 
 public class IoTVideoSdkTest extends AppCompatActivity implements View.OnClickListener{
 
-    private Button btn_init;
     private Button btn_register;
     private Button btn_unregister;
     private Button btn_getTerminalId;
@@ -41,13 +40,11 @@ public class IoTVideoSdkTest extends AppCompatActivity implements View.OnClickLi
         tv_print = (TextView)findViewById(R.id.tv_print);
         tv_print.setMovementMethod(ScrollingMovementMethod.getInstance());
 
-        btn_init = (Button)findViewById(R.id.btn_init);
         btn_register = (Button)findViewById(R.id.btn_register);
         btn_unregister = (Button)findViewById(R.id.btn_unregister);
         btn_getTerminalId = (Button)findViewById(R.id.btn_getTerminalId);
         btn_getLocalIPAddress = (Button)findViewById(R.id.btn_getLocalIPAddress);
 
-        btn_init.setOnClickListener(this);
         btn_register.setOnClickListener(this);
         btn_unregister.setOnClickListener(this);
         btn_getTerminalId.setOnClickListener(this);
@@ -56,16 +53,14 @@ public class IoTVideoSdkTest extends AppCompatActivity implements View.OnClickLi
         AccessId = Long.parseLong(getApplicationContext().getString(R.string.AccessId));
         AccessToken = getApplicationContext().getString(R.string.AccessToken);
 
+        IoTVideoSdk.init(getApplication(),null);
+        setTextView(tv_print, "已自动初始化SDK");
+
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.btn_init:
-                IoTVideoSdk.init(getApplication(),null);
-                setTextView(tv_print, "初始化SDK");
-                break;
-
             //注册sdk
             case R.id.btn_register:
                 IoTVideoSdk.register(AccessId, AccessToken);
