@@ -3,7 +3,6 @@ package com.example.sdk_test;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
@@ -12,8 +11,6 @@ import android.widget.TextView;
 
 import com.tencentcs.iotvideo.IoTVideoSdk;
 import com.tencentcs.iotvideo.messagemgr.IAppLinkListener;
-import com.tencentcs.iotvideo.messagemgr.MessageMgr;
-import com.tencentcs.iotvideo.utils.LogUtils;
 
 import java.net.SocketException;
 import java.text.SimpleDateFormat;
@@ -23,6 +20,7 @@ public class IoTVideoSdkTest extends AppCompatActivity implements View.OnClickLi
 
     private Button btn_register;
     private Button btn_unregister;
+    private Button btn_getP2PVersion;
     private Button btn_getTerminalId;
     private Button btn_getLocalIPAddress;
     private TextView tv_print;
@@ -40,13 +38,16 @@ public class IoTVideoSdkTest extends AppCompatActivity implements View.OnClickLi
         tv_print = (TextView)findViewById(R.id.tv_print);
         tv_print.setMovementMethod(ScrollingMovementMethod.getInstance());
 
+
         btn_register = (Button)findViewById(R.id.btn_register);
         btn_unregister = (Button)findViewById(R.id.btn_unregister);
+        btn_getP2PVersion = (Button)findViewById(R.id.btn_getP2PVersion);
         btn_getTerminalId = (Button)findViewById(R.id.btn_getTerminalId);
         btn_getLocalIPAddress = (Button)findViewById(R.id.btn_getLocalIPAddress);
 
         btn_register.setOnClickListener(this);
         btn_unregister.setOnClickListener(this);
+        btn_getP2PVersion.setOnClickListener(this);
         btn_getTerminalId.setOnClickListener(this);
         btn_getLocalIPAddress.setOnClickListener(this);
 
@@ -54,27 +55,40 @@ public class IoTVideoSdkTest extends AppCompatActivity implements View.OnClickLi
         AccessToken = getApplicationContext().getString(R.string.AccessToken);
 
         IoTVideoSdk.init(getApplication(),null);
-        setTextView(tv_print, "已自动初始化SDK，测试");
+        setTextView(tv_print, "已自动初始化SDK");
+
+        setMessageMgr();
 
     }
 
+    /*
+    *   添加App上线监听
+    * */
+    private void setMessageMgr() {
+        IoTVideoSdk.getMessageMgr().addAppLinkListener(new IAppLinkListener(){
+            @Override
+            public void onAppLinkStateChanged(int state) {
+                switch (state){
+                    case IoTVideoSdk.APP_LINK_ONLINE:
+                        setTextView(tv_print, "注册SDK成功，APP已上线");
+                        break;
+                    case IoTVideoSdk.APP_LINK_OFFLINE:
+                        setTextView(tv_print, "反注册SDK成功，APP已离线");
+                        break;
+                }
+            }
+        });
+    }
+
+    /*
+    *   设置按键响应事件
+    * */
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             //注册sdk
             case R.id.btn_register:
                 IoTVideoSdk.register(AccessId, AccessToken);
-
-                p2pVersion = -1;
-                IoTVideoSdk.getMessageMgr().addAppLinkListener(new IAppLinkListener(){
-                    @Override
-                    public void onAppLinkStateChanged(int state) {
-                        //上线监听回调
-                        if (IoTVideoSdk.APP_LINK_ONLINE == state){
-                            setTextView(tv_print, "注册SDK成功");
-                        }
-                    }
-                });
                 break;
 
             //获取局域网IP地址
@@ -93,20 +107,15 @@ public class IoTVideoSdkTest extends AppCompatActivity implements View.OnClickLi
             //反注册
             case R.id.btn_unregister:
                 IoTVideoSdk.unregister();
-                p2pVersion = -1;
-                p2pVersion = IoTVideoSdk.getP2PVersion();
-                if (p2pVersion == -1){
-                    setTextView(tv_print, "反注册SDK成功" + ",P2P版本为" + p2pVersion);
-                }
-                else{
-                    setTextView(tv_print, "反注册SDK失败" + ",P2P版本为" + p2pVersion);
-                }
                 break;
 
             //获取终端ID
             case R.id.btn_getTerminalId:
                 setTextView(tv_print, "终端ID为：" + String.valueOf(IoTVideoSdk.getTerminalId()));
                 break;
+
+            case R.id.btn_getP2PVersion:
+                setTextView(tv_print, "P2P版本为：" + IoTVideoSdk.getP2PVersion());
         }
     }
 

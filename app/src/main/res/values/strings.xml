@@ -4,4 +4,5 @@
     <string name="TerminalId">-9222942510060404733</string>
     <string name="AccessToken">01013132C5A34E169F835A53A7860100A9BA07B2033603FD0BD087CCB13A8A2244004D41EF1EC709A8891FFAFF786E31D379468AAA796C9134270899667EAE12</string>
     <string name="getlocalipaddress">getLocalIPAddress</string>
+    <string name="getP2PVersion">getP2PVersion</string>
 </resources>
